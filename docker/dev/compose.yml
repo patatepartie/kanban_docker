@@ -1,0 +1,14 @@
+version: '2'
+volumes:
+  kanban_modules:
+    driver: local
+services:
+  kanban:
+    build:
+      context: ../..
+      dockerfile: docker/dev/Dockerfile
+    volumes:
+      - ../..:/kanban:rw
+      - kanban_modules:/kanban/node_modules
+    ports:
+      - "8080:8080"
