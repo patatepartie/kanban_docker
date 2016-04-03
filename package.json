@@ -5,9 +5,12 @@
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
-    "webpack": "^1.12.14"
+    "webpack": "^1.12.14",
+    "webpack-dev-server": "^1.14.1"
   },
   "scripts": {
+    "build": "webpack",
+    "start": "webpack-dev-server --content-base build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
