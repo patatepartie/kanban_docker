@@ -22,6 +22,13 @@ const common = {
     filename: 'bundle.js'
   },
   module: {
+    preLoaders: [
+      {
+        test: /\.jsx?$/,
+        loaders: ['eslint'],
+        include: PATHS.app
+      }
+    ],
     loaders: [
       {
         test: /\.css$/,
