@@ -6,21 +6,21 @@ class NoteStore {
   constructor() {
     this.bindActions(NoteActions);
 
-    this.notes = [];
+    this.lanes = [];
   }
 
   create(note) {
-    const notes = this.notes;
+    const notes = this.lanes;
 
     note.id = uuid.v4();
 
     this.setState({
-      notes: notes.concat(note)
+      lanes: notes.concat(note)
     })
   }
 
   update(updatedNote) {
-    const notes = this.notes.map(note => {
+    const notes = this.lanes.map(note => {
       if (note.id === updatedNote.id) {
         return Object.assign({}, note, updatedNote);
       }
@@ -28,12 +28,12 @@ class NoteStore {
       return note;
     });
 
-    this.setState({notes});
+    this.setState({lanes});
   }
 
   delete(id) {
     this.setState({
-      notes: this.notes.filter(note => note.id !== id)
+      lanes: this.lanes.filter(note => note.id !== id)
     });
   }
 }
