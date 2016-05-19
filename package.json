@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "alt": "^0.18.4",
     "react": "^15.0.2",
     "react-dom": "^15.0.2"
   },
