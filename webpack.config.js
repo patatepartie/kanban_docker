@@ -4,6 +4,8 @@ const webpack = require('webpack');
 
 const NpmInstallPlugin = require('npm-install-webpack-plugin');
 
+const pkg = require('./package.json');
+
 const TARGET = process.env.npm_lifecycle_event;
 const PATHS = {
   app: path.join(__dirname, 'app'),
@@ -21,7 +23,7 @@ const common = {
   },
   output: {
     path: PATHS.build,
-    filename: 'bundle.js'
+    filename: '[name].js'
   },
   module: {
     preLoaders: [
@@ -71,7 +73,17 @@ if (TARGET === 'start' || !TARGET) {
 
 if (TARGET === 'build') {
   module.exports = merge(common, {
+    entry: {
+      vendor: Object.keys(pkg.dependencies).filter(function(v) {
+        // Exclude alt-utils as it won't work with this setup due to the way the package has been designed
+        // (no package.json main).
+        return v !== 'alt-utils';
+      })
+    },
     plugins: [
+      new webpack.optimize.CommonsChunkPlugin({
+        names: ['vendor', 'manifest']
+      }),
       // Setting DefinePlugin affects React library size!
       // DefinePlugin replaces content "as is" so we need some extra quotes for the generated code to make sense
       new webpack.DefinePlugin({
