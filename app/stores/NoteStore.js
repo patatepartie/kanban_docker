@@ -9,7 +9,8 @@ class NoteStore {
     this.notes = [];
 
     this.exportPublicMethods({
-      getNotesByIds: this.getNotesByIds.bind(this)
+      getNotesByIds: this.getNotesByIds.bind(this),
+      deleteNotesWithIds: this.deleteNotesWithIds.bind(this)
     });
   }
 
@@ -47,6 +48,14 @@ class NoteStore {
     return (ids || []).reduce(
       (notes, id) => notes.concat(this.notes.filter(note => note.id === id))
       , []);
+  }
+
+  deleteNotesWithIds(ids) {
+    const notes = this.notes.filter(note => {
+      return !(ids || []).includes(note.id);
+    });
+    
+    this.setState({notes});
   }
 }
 

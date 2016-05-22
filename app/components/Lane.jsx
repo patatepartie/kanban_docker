@@ -87,9 +87,10 @@ export default class Lane extends React.Component {
   };
 
   deleteLane = () => {
-    const laneId = this.props.lane.id;
+    const lane = this.props.lane;
 
-    LaneActions.delete(laneId);
+    NoteStore.deleteNotesWithIds(lane.notes);
+    LaneActions.delete(lane.id);
   };
 
   activateLaneEdit = () => {
