@@ -40,7 +40,8 @@
     "build": "webpack",
     "start": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint . --ext .js --ext .jsx --ignore-path .gitignore --cache"
+    "lint": "eslint . --ext .js --ext .jsx --ignore-path .gitignore --cache",
+    "stats": "webpack --profile --json"
   },
   "keywords": [],
   "author": "",

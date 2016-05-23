@@ -87,7 +87,7 @@ if (TARGET === 'start' || !TARGET) {
   });
 }
 
-if (TARGET === 'build') {
+if (TARGET === 'build' || TARGET === 'stats') {
   module.exports = merge(common, {
     entry: {
       vendor: Object.keys(pkg.dependencies).filter(function(v) {
@@ -112,7 +112,7 @@ if (TARGET === 'build') {
     },
     plugins: [
       new CleanPlugin([PATHS.build], {
-        verbose: true
+        verbose: false
       }),
       new ExtractTextPlugin('[name].[chunkhash].css'),
       new webpack.optimize.CommonsChunkPlugin({
