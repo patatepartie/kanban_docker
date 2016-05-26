@@ -1,0 +1,28 @@
+FROM node:5.6.0
+
+ENV SRC_DIR="/src"
+ENV PKG_DIR="/build"
+ENV BUILD_DIR="${PKG_DIR}/build"
+ENV NGINX_DIR="${PKG_DIR}/nginx"
+
+WORKDIR ${SRC_DIR}
+
+COPY package.json package.json
+RUN npm install
+
+RUN mkdir -p ${BUILD_DIR} && \
+    mkdir -p ${NGINX_DIR}
+
+COPY .babelrc ./
+COPY .eslintrc ./
+COPY webpack.config.js ./
+COPY app app
+
+RUN npm run build
+
+COPY docker/prod/Dockerfile ${PKG_DIR}/
+COPY docker/prod/nginx.conf ${NGINX_DIR}/
+
+WORKDIR ${PKG_DIR}
+
+CMD tar cf - .

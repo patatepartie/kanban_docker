@@ -12,8 +12,8 @@ const pkg = require('./package.json');
 const TARGET = process.env.npm_lifecycle_event;
 const PATHS = {
   app: path.join(__dirname, 'app'),
-  build: path.join(__dirname, 'build'),
-  style: path.join(__dirname, 'app/main.css')
+  style: path.join(__dirname, 'app/main.css'),
+  build: process.env.BUILD_DIR || path.join(__dirname, 'build')
 };
 
 process.env.BABEL_ENV = TARGET;
