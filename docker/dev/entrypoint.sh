@@ -6,6 +6,6 @@ if [ ! "$(ls -A ${MODULES_DIR} 2> /dev/null)" ]; then
    npm install
 fi
 
-CMD=$1
+CMD="$1"
 shift
-exec ${CMD} $@
+exec ${CMD} "$@"
